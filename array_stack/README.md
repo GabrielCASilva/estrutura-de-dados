@@ -1,1 +1,1 @@
-# Aplicação de pila com arrays
+# Aplicação de pilha com arrays
