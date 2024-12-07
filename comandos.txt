@@ -1,1 +1,1 @@
-gcc -o main main.c
+gcc -o main stack.c main.c
