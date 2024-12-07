@@ -8,27 +8,13 @@ Stack *stack_create(int len) {
   return stack;
 }
 
-int stack_get_item(Stack *stack, int index) {
-  if (!stack_is_not_null(stack)) {
-    printf("Stack does not exist\n");
-    exit(1);
-  }
-
-  if (index < 0 || index >= stack->len) {
-    printf("Index out of bounds\n");
-    exit(1);
-  }
-
-  return stack->itens[index];
-}
-
 void stack_push(Stack *stack, int item) {
-  if (!stack_is_not_null(stack)) {
+  if (stack == NULL) {
     printf("Stack does not exist\n");
-    exit(1);
+    return;
   }
 
-  if (stack_is_full(stack)) {
+  if (stack->qtd == stack->len) {
     stack_resize(stack);
   }
 
@@ -37,13 +23,13 @@ void stack_push(Stack *stack, int item) {
 }
 
 int stack_pop(Stack *stack) {
-  if (!stack_is_not_null(stack)) {
+  if (stack == NULL) {
     printf("Stack does not exist\n");
-    exit(1);
+    return -1;
   }
 
-  if (stack_is_empty(stack)) {
-    printf("Stack is already empty\n");
+  if (stack->qtd == 0) {
+    printf("Stack is empty\n");
     return -1;
   }
 
@@ -52,12 +38,12 @@ int stack_pop(Stack *stack) {
 }
 
 int stack_peek(Stack *stack) {
-  if (!stack_is_not_null(stack)) {
+  if (stack == NULL) {
     printf("Stack does not exist\n");
-    exit(1);
+    return -1;
   }
 
-  if (stack_is_empty(stack)) {
+  if (stack->qtd == 0) {
     printf("Stack is empty\n");
     return -1;
   }
@@ -66,9 +52,9 @@ int stack_peek(Stack *stack) {
 }
 
 Stack *stack_copy(Stack *stack) {
-  if (!stack_is_not_null(stack)) {
+  if (stack == NULL) {
     printf("Stack does not exist\n");
-    exit(1);
+    return NULL;
   }
 
   Stack *new = stack_create(stack->len);
@@ -80,12 +66,8 @@ Stack *stack_copy(Stack *stack) {
   return new;
 }
 
-int stack_is_full(Stack *stack) { return stack->qtd == stack->len; }
-
-int stack_is_empty(Stack *stack) { return stack->qtd == 0; }
-
 void stack_resize(Stack *stack) {
-  if (!stack_is_not_null(stack)) {
+  if (stack == NULL) {
     printf("Stack does not exist\n");
     exit(1);
   }
@@ -102,4 +84,84 @@ void stack_resize(Stack *stack) {
   stack->len *= 2;
 }
 
-int stack_is_not_null(Stack *stack) { return stack != NULL; }
+void stack_print(Stack *stack) {
+  if (stack == NULL) {
+    printf("Stack does not exist\n");
+    exit(1);
+  }
+
+  if (stack->qtd == 0) {
+    printf("Stack is empty\n");
+    return;
+  }
+
+  for (int i = 0; i < stack->qtd; i++) {
+    printf("%d ", stack->itens[i]);
+  }
+  printf("\n");
+}
+
+int stack_search(Stack *stack, int item) {
+  if (stack == NULL) {
+    printf("Stack does not exist\n");
+    return -1;
+  }
+
+  if (stack->qtd == 0) {
+    printf("Stack is empty\n");
+    return -1;
+  }
+
+  for (int i = 0; i < stack->qtd; i++) {
+    if (stack->itens[i] == item) {
+      return i;
+    }
+  }
+
+  return -1;
+}
+
+void stack_trim(Stack *stack) {
+  if (stack == NULL || stack->itens == NULL) {
+    printf("Stack does not exist\n");
+    return;
+  }
+
+  int size = stack->len - stack->qtd;
+  if ( size == 0 || size < 5 ) {
+    printf("Stack is already trimmed or the size difference is not too big\n");
+    return;
+  }
+
+  //// stack->itens = (int*)realloc(stack->itens, stack->qtd * sizeof(int));
+  int *new_itens = (int *)malloc(stack->qtd * sizeof(int));
+  for (int i = 0; i < stack->qtd; i++) {
+    new_itens[i] = stack->itens[i];
+  }
+
+  free(stack->itens);
+  stack->itens = new_itens;
+  stack->len = stack->qtd;
+}
+
+void stack_destroy(Stack *stack) {
+  if (stack == NULL || stack->itens == NULL) {
+    printf("Stack does not exist\n");
+    return;
+  }
+
+  free(stack->itens);
+  stack->itens = NULL;
+
+  free(stack);
+  stack = NULL;
+}
+
+void stack_clear(Stack *stack) {
+  if (stack == NULL || stack->itens == NULL) {
+    return;
+  }
+
+  free(stack->itens);
+  stack->qtd = 0; 
+}
