@@ -1,6 +1,6 @@
-# Aplicação de pilha com arrays
+# Aplicação de Fila com arrays
 
-Uma pilha é uma estrutura LIFO (Last-in, First-out), em que o último elemento inserido é o primeiro a ser removido
+Uma fila é uma estrutura FIFO (First-in, First-out), em que o primeiro elemento a entrar é o primeiro a sair.
 
 ## Estrutura
 
@@ -14,7 +14,7 @@ Uma pilha é uma estrutura LIFO (Last-in, First-out), em que o último elemento 
 
 - Compilando o código:
 ```bash
-gcc -o main stack.c main.c
+gcc -o main queue.c main.c
 ```
 
 - Executando o programa
