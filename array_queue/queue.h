@@ -1,6 +1,8 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
+#include <stdio.h>
+#include <stdlib.h>
 typedef struct {
   int *arr;
   int start;
@@ -18,7 +20,6 @@ void queue_clear(Queue *queue); // remove todos os elementos
 void queue_destroy(Queue *queue); // destroi a fila
 int queue_len(Queue *queue); // retorna o tamanho da fila
 void queue_resize(Queue *queue); // redimensiona a fila para o doubro do tamanho original
-
 int queue_is_null(Queue *queue); // verifica se a fila é nula
 int queue_is_empty(Queue *queue); // verifica se a fila está vazia
 int queue_is_null_and_is_empty(Queue *queue); // verifica se a fila é nula e se está vazia

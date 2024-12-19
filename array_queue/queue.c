@@ -1,5 +1,4 @@
 #include "queue.h"
-#include "stdio.h"
 
 Queue *queue_create(int len) {
   Queue *queue = (Queue*)malloc(sizeof(Queue));
@@ -66,7 +65,8 @@ void queue_clear(Queue *queue) {
 
 
 void queue_destroy(Queue *queue) {
-
+  free(queue->arr);
+  free(queue);
 }
 
 int queue_len(Queue *queue) {
