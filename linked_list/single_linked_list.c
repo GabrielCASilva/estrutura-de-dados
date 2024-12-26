@@ -63,14 +63,12 @@ int list_remove(List **lst, int value) {
 
   List *aux = NULL;
   List *node = *lst;
-  while (node != NULL) {
-    if (value == node->n)
-      break;
+  while (node != NULL && value != node->n) {
     aux = node;
     node = node->next;
   }
 
-  if (node == NULL || value != node->n)
+  if (node == NULL)
     return -1;
 
   aux->next = node->next;

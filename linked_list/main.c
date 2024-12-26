@@ -17,10 +17,24 @@ void single_linked_list_app(void) {
   list_push(&list, 2);
   list_push(&list, 5);
   list_push(&list, 7);
+
   list_print(list);
 
-  /* list_pop_head(&list); */
-  /* list_print(list); */
+  list_pop_head(&list);
+  list_print(list);
+
+  list_pop_tail(&list);
+  list_print(list);
+
+  list_push(&list, 10);
+  list_push(&list, 5);
+  list_push(&list, 8);
+
+  list_print(list);
+
+  list_remove(&list, 10);
+
+  list_print(list);
 
   list_free(&list);
 }
