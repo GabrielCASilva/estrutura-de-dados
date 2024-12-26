@@ -1,29 +1,35 @@
 #include "single_linked_list.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 List *list_create() { return NULL; }
 
-List *list_push(List *lst, int value) {
+List *list_push(List **lst, int value) {
   List *node = (List *)malloc(sizeof(List));
   node->n = value;
   node->next = NULL;
 
-  if (lst == NULL) {
-    lst = node;
-  } else {
-    lst->next = node;
+  if (*lst == NULL) {
+    *lst = node;
+    return node;
   }
 
+  List *aux = *lst;
+  while (aux->next != NULL) {
+    aux = aux->next;
+  }
+
+  aux->next = node;
   return node;
 }
 
-int list_pop_head(List *lst) {
+int list_pop_head(List **lst) {
   if (lst == NULL)
     return -1;
-  int value = lst->n;
+  int value = (*lst)->n;
 
-  List *head = lst;
-  lst = lst->next;
+  List *head = *lst;
+  *lst = (*lst)->next;
 
   free(head);
   head = NULL;
@@ -31,14 +37,14 @@ int list_pop_head(List *lst) {
   return value;
 }
 
-int list_pop_tail(List *lst) {
-  if (lst == NULL)
+int list_pop_tail(List **lst) {
+  if (*lst == NULL)
     return -1;
-  if (lst->next == NULL)
+  if ((*lst)->next == NULL)
     return list_pop_head(lst);
 
   List *aux = NULL;
-  List *tail = lst;
+  List *tail = *lst;
   while (tail->next != NULL) {
     aux = tail;
     tail = tail->next;
@@ -51,12 +57,12 @@ int list_pop_tail(List *lst) {
   return aux->n;
 }
 
-int list_remove(List *lst, int value) {
-  if (lst == NULL)
+int list_remove(List **lst, int value) {
+  if ((*lst) == NULL)
     return -1;
 
   List *aux = NULL;
-  List *node = lst;
+  List *node = *lst;
   while (node != NULL) {
     if (value == node->n)
       break;
@@ -74,16 +80,23 @@ int list_remove(List *lst, int value) {
   return aux->n;
 }
 
-void list_free(List *lst) {
-  if (lst == NULL)
+void list_free(List **lst) {
+  if ((*lst) == NULL)
     return;
 
-  List *aux = lst;
+  List *aux = *lst;
   while (aux != NULL) {
     List *p = aux->next;
     free(aux);
-    aux = p->next;
+    aux = p;
   }
 }
 
-void list_print(List *lst) {}
+void list_print(List *lst) {
+  List *aux;
+  printf("List: ");
+  for (aux = lst; aux != NULL; aux = aux->next) {
+    printf("%d -> ", aux->n);
+  }
+  printf("NULL\n");
+}
