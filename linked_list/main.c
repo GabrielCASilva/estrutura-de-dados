@@ -24,6 +24,18 @@ void double_linked_list_app(void) {
   dlist_push_head(&list, 0);
   dlist_print(list);
 
+  dlist_push_tail(&list, 10);
+  dlist_print(list);
+
+  dlist_pop_head(&list);
+  dlist_print(list);
+
+  dlist_pop_tail(&list);
+  dlist_print(list);
+
+  dlist_remove(&list, 2);
+  dlist_print(list);
+
   dlist_free(&list);
 }
 

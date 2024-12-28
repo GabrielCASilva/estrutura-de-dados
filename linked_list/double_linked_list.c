@@ -26,6 +26,86 @@ DList *dlist_push_head(DList **list, int value) {
   return node;
 }
 
+DList *dlist_push_tail(DList **list, int value) {
+  DList *node = dlist_create_node(value);
+
+  if ((*list) == NULL) {
+    *list = node;
+  } else {
+    DList *p = *list;
+    while (p->next != NULL) {
+      p = p->next;
+    }
+
+    p->next = node;
+    node->prev = p;
+  }
+
+  return node;
+}
+
+// TODO: passar retorno para inteiro
+DList *dlist_pop_head(DList **list) {
+  if ((*list) == NULL)
+    return NULL;
+
+  DList *p = *list;
+  *list = (*list)->next;
+  free(p);
+  p = NULL;
+  (*list)->prev = p;
+
+  return *list;
+}
+
+// TODO: passar retorno para inteiro
+DList *dlist_pop_tail(DList **list) {
+  if ((*list) == NULL)
+    return NULL;
+
+  DList *p = *list;
+  while (p->next != NULL) {
+    p = p->next;
+  }
+
+  DList *tail = p->prev;
+  free(p);
+  p = NULL;
+  tail->next = p;
+
+  return *list;
+}
+
+int dlist_remove(DList **list, int value) {
+  if ((*list) == NULL)
+    return -1;
+
+  DList *p = *list;
+  while (p->next != NULL && p->value != value) {
+    p = p->next;
+  }
+
+  if (p->value != value)
+    return -1;
+
+  DList *prev = p->prev;
+  DList *next = p->next;
+
+  free(p);
+  p = NULL;
+
+  if (prev != NULL && next != NULL) {
+    prev->next = next;
+    next->prev = prev;
+  } else if (prev != NULL) {
+    next->prev = p;
+  } else if (next != NULL) {
+    prev->next = p;
+  }
+
+  return value;
+}
+
 void dlist_free(DList **list) {
   if ((*list) == NULL)
     return;
