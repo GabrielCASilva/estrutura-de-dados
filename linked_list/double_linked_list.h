@@ -32,12 +32,12 @@ DList *dlist_push_tail(DList **list, int value);
 /*
  * Retirar o item do inicio da lista
  */
-DList *dlist_pop_head(DList **list);
+int dlist_pop_head(DList **list);
 
 /*
  * Retirar o item do final da lista
  */
-DList *dlist_pop_tail(DList **list);
+int dlist_pop_tail(DList **list);
 
 /*
  * Remover um nó por um valor em específico caso ele exista

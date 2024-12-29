@@ -1,18 +1,33 @@
+#include "circular_single_linked_list.h"
 #include "double_linked_list.h"
 #include "single_linked_list.h"
 #include <string.h>
 
 void single_linked_list_app(void);
 void double_linked_list_app(void);
+void circular_single_linked_list_app(void);
 
 int main(int argc, char *argv[]) {
   if (strcmp(argv[1], "single") == 0) {
     single_linked_list_app();
   } else if (strcmp(argv[1], "double") == 0) {
     double_linked_list_app();
+  } else if (strcmp(argv[1], "circular_single") == 0) {
+    circular_single_linked_list_app();
   }
 
   return 0;
+}
+
+void circular_single_linked_list_app(void) {
+  Cir_SList *list = cir_slist_create();
+
+  cir_slist_push_tail(&list, 10);
+  cir_slist_push_tail(&list, 9);
+  cir_slist_push_tail(&list, 8);
+  cir_slist_print(list);
+
+  cir_slist_free(&list);
 }
 
 void double_linked_list_app(void) {
