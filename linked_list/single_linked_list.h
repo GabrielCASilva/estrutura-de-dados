@@ -43,4 +43,18 @@ void list_free(List **lst);
  */
 void list_print(List *lst);
 
+//////////////////////////
+///// MÉTODOS EXTRAS /////
+//////////////////////////
+
+/*
+ * Retorna o penultimo elemento da lista.
+ */
+List *list_second_last(List *lst);
+
+/*
+ * Reverte a lista
+ */
+void list_reverse(List **lst);
+
 #endif // SINGLE_LINKED_LIST

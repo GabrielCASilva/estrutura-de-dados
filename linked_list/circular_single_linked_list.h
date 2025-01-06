@@ -34,11 +34,6 @@ Cir_SList *cir_slist_push_tail(Cir_SList **list, int value);
 int cir_slist_pop_head(Cir_SList **list);
 
 /*
- * Retirar o item do final da lista
- */
-int cir_slist_pop_tail(Cir_SList **list);
-
-/*
  * Remover um nó por um valor em específico caso ele exista
  */
 int cir_slist_remove(Cir_SList **list, int value);

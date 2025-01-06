@@ -33,11 +33,46 @@ Cir_SList *cir_slist_push_tail(Cir_SList **list, int value) {
   return NULL;
 }
 
-int cir_slist_pop_head(Cir_SList **list) { return -1; }
+int cir_slist_pop_head(Cir_SList **list) {
+  if ((*list) == NULL)
+    return -1;
 
-int cir_slist_pop_tail(Cir_SList **list) { return -1; }
+  Cir_SList *head = *list;
+  Cir_SList *prev = *list;
+  while (prev->next != *list)
+    prev = prev->next;
 
-int cir_slist_remove(Cir_SList **list, int value) { return -1; }
+  int value = (*list)->value;
+  *list = (*list)->next;
+  prev->next = *list;
+  free(head);
+  head = NULL;
+
+  return value;
+}
+
+int cir_slist_remove(Cir_SList **list, int value) {
+  if ((*list) == NULL)
+    return -1;
+
+  Cir_SList *prev = *list;
+  while (prev->next != *list && prev->next->value != value) {
+    prev = prev->next;
+  }
+
+  if (prev->next->value != value)
+    return -1;
+
+  Cir_SList *node = prev->next;
+  int rm_value = node->value;
+
+  Cir_SList *next = node->next;
+  prev->next = next;
+  free(node);
+  node = NULL;
+
+  return rm_value;
+}
 
 void cir_slist_free(Cir_SList **list) {
   if ((*list)->next == *list) {

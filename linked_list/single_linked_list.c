@@ -98,3 +98,44 @@ void list_print(List *lst) {
   }
   printf("NULL\n");
 }
+
+//////////////////////////
+///// MÉTODOS EXTRAS /////
+//////////////////////////
+
+List *list_second_last(List *lst) {
+  if (lst == NULL && lst->next == NULL)
+    return NULL;
+
+  List *p = lst;
+  while (p != NULL && p->next->next != NULL)
+    p = p->next;
+
+  return p;
+}
+
+void list_reverse(List **lst) {
+  if (*lst == NULL)
+    return;
+
+  // chegar no final da lista
+  List *tail = *lst;
+  while (tail->next != NULL)
+    tail = tail->next;
+
+  List *head = *lst;
+  while (head != tail) {
+    if (head == *lst) {
+      tail->next = head;
+      head = head->next;
+      tail->next->next = NULL;
+    } else {
+      List *aux = head;
+      head = head->next;
+      aux->next = tail->next;
+      tail->next = aux;
+    }
+  }
+
+  *lst = tail;
+}

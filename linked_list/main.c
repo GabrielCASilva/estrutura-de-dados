@@ -1,6 +1,7 @@
 #include "circular_single_linked_list.h"
 #include "double_linked_list.h"
 #include "single_linked_list.h"
+#include <stdio.h>
 #include <string.h>
 
 void single_linked_list_app(void);
@@ -14,6 +15,8 @@ int main(int argc, char *argv[]) {
     double_linked_list_app();
   } else if (strcmp(argv[1], "circular_single") == 0) {
     circular_single_linked_list_app();
+  } else {
+    printf("Comando inválido ou inexistênte");
   }
 
   return 0;
@@ -24,7 +27,22 @@ void circular_single_linked_list_app(void) {
 
   cir_slist_push_tail(&list, 10);
   cir_slist_push_tail(&list, 9);
+  cir_slist_print(list);
+
   cir_slist_push_tail(&list, 8);
+  cir_slist_push_tail(&list, 7);
+  cir_slist_print(list);
+
+  cir_slist_pop_head(&list);
+  cir_slist_print(list);
+
+  cir_slist_push_tail(&list, 2);
+  cir_slist_push_tail(&list, 22);
+  cir_slist_push_tail(&list, 10);
+  cir_slist_push_tail(&list, 20);
+  cir_slist_print(list);
+
+  cir_slist_remove(&list, 22);
   cir_slist_print(list);
 
   cir_slist_free(&list);
@@ -71,12 +89,18 @@ void single_linked_list_app(void) {
 
   list_push(&list, 10);
   list_push(&list, 5);
-  list_push(&list, 8);
+  list_push(&list, 7);
+  list_push(&list, 9);
+  list_push(&list, 29);
+  list_push(&list, 23);
+  list_push(&list, 14);
 
   list_print(list);
 
   list_remove(&list, 10);
+  list_print(list);
 
+  list_reverse(&list);
   list_print(list);
 
   list_free(&list);
