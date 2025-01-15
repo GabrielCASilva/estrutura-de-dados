@@ -42,4 +42,9 @@ int SkipList_insert(SkipList *sk, int key);
 
 int SkipList_drawNumber(SkipList *sk);
 
+/*
+ * Remove um elemento da Skip List
+ */
+int SkipList_remove(SkipList *sk, int key);
+
 #endif // SKIP_LIST_H

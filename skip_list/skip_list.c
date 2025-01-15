@@ -120,3 +120,42 @@ int SkipList_drawNumber(SkipList *sk) {
 
   return level;
 }
+
+int SkipList_remove(SkipList *sk, int key) {
+  if (sk == NULL)
+    return 0;
+
+  struct node *current = sk->init;
+  struct node **aux = malloc((sk->maxLevel + 1) * sizeof(struct node *));
+  int i = 0;
+  for (; i <= sk->maxLevel + 1; i++)
+    aux[i] = NULL;
+
+  for (i = sk->level; i >= 0; i--) {
+    while (current->next[i] != NULL && current->next[i]->key < key)
+      current = current->next[i];
+    aux[i] = current;
+  }
+
+  current = current->next[0];
+
+  if (current != NULL && current->key == key) {
+    for (i = 0; i <= sk->level; i++) {
+      if (aux[i]->next[i] != current)
+        break;
+
+      aux[i]->next[i] = current->next[i];
+    }
+
+    while (sk->level > 0 && sk->init->next[sk->level] == NULL)
+      sk->level--;
+
+    free(current->next);
+    free(current);
+    free(aux);
+    return 1;
+  }
+
+  free(aux);
+  return 0;
+}
