@@ -1,4 +1,5 @@
 #include "queue.h"
+#include <stdio.h>
 
 Queue *queue_create(int len) {
   Queue *queue = (Queue *)malloc(sizeof(Queue));
@@ -108,4 +109,15 @@ int queue_is_null_and_is_empty(Queue *queue) {
     return 1;
 
   return 0;
+}
+
+void queue_print(Queue *queue) {
+  if (queue_is_null(queue) || queue_is_empty(queue))
+    return;
+
+  for (int i = 0; i < queue->qtd; i++) {
+    printf("%d ", queue->arr[i]);
+  }
+
+  printf("\n");
 }
