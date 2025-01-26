@@ -2,11 +2,13 @@
 #include "double_linked_list.h"
 #include "single_linked_list.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 void single_linked_list_app(void);
 void double_linked_list_app(void);
 void circular_single_linked_list_app(void);
+void exercises_test(void);
 
 int main(int argc, char *argv[]) {
   if (strcmp(argv[1], "single") == 0) {
@@ -15,11 +17,38 @@ int main(int argc, char *argv[]) {
     double_linked_list_app();
   } else if (strcmp(argv[1], "circular_single") == 0) {
     circular_single_linked_list_app();
+  } else if (strcmp(argv[1], "exercises") == 0) {
+    exercises_test();
   } else {
     printf("Comando inválido ou inexistênte");
   }
 
   return 0;
+}
+
+void exercises_test(void) {
+  printf("Testes dos exercícios: \n");
+  printf("Exercicio 1: \n");
+
+  List *list = list_create();
+  list_push(&list, 2);
+  list_push(&list, 5);
+  list_push(&list, 3);
+
+  char *stringfyed = list_stringfy(list);
+
+  List *aux = list;
+  int i = 0;
+  for (; aux != NULL; aux = aux->next) {
+    printf("%c -> ", stringfyed[i]);
+    i++;
+  }
+  printf("NULL\n");
+  free(stringfyed);
+  list_free(&list);
+
+  printf("\nExercicio 2: \n");
+  // TODO:
 }
 
 void circular_single_linked_list_app(void) {

@@ -139,3 +139,21 @@ void list_reverse(List **lst) {
 
   *lst = tail;
 }
+
+char *list_stringfy(List *lst) {
+  List *aux = lst;
+  int len = 0;
+  for (; aux != NULL; aux = aux->next)
+    len++;
+
+  char *text = (char *)malloc(len * sizeof(char));
+
+  aux = lst;
+  int i = 0;
+  for (; aux != NULL; aux = aux->next) {
+    sprintf(&text[i], "%d", aux->n);
+    i++;
+  }
+
+  return text;
+}

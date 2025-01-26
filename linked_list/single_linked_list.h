@@ -57,4 +57,9 @@ List *list_second_last(List *lst);
  */
 void list_reverse(List **lst);
 
+/*
+ * Converte uma lista para string
+ */
+char *list_stringfy(List *lst);
+
 #endif // SINGLE_LINKED_LIST
