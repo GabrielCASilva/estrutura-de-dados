@@ -157,3 +157,54 @@ char *list_stringfy(List *lst) {
 
   return text;
 }
+
+// TODO: esqueceu de levar em conta a condição do primeiro item da lista ser o
+// trocavel
+int list_swap_nodes(List *lst1, int i1, List *lst2, int i2) {
+  if (lst1 == NULL || lst2 == NULL)
+    return 0; // pelo menos uma das listas estão vazias
+
+  List *ant1 = lst1;
+  List *ant2 = lst2;
+
+  int i = 0;
+  while (ant1 != NULL) {
+    if (i == (i1 - 1)) // cair no nó anterior ao mudado
+      break;
+    i++;
+    ant1 = ant1->next;
+  }
+
+  if (ant1 == NULL)
+    return 0; // não é possível fazer o swap
+
+  i = 0;
+  while (ant2 != NULL) {
+    if (i == (i2 - 1)) // cair no nó anterior ao mudado
+      break;
+    i++;
+    ant2 = ant2->next;
+  }
+
+  if (ant2 == NULL)
+    return 0; // não é possível fazer o swap
+
+  List *troca1 = ant1->next;
+  List *troca2 = ant2->next;
+
+  if (troca1 == NULL || troca2 == NULL)
+    return 0; // não é possível trocar
+
+  List *prox1 = troca1->next;
+  List *prox2 = troca2->next;
+
+  if (prox1 != NULL || prox2 != NULL) {
+    troca1->next = prox2;
+    troca2->next = prox1;
+  }
+
+  ant1->next = troca2;
+  ant2->next = troca1;
+
+  return 1;
+}

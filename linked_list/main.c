@@ -46,8 +46,30 @@ void exercises_test(void) {
   printf("NULL\n");
   free(stringfyed);
   list_free(&list);
+  list = NULL;
 
   printf("\nExercicio 2: \n");
+  List *lst1 = list_create();
+  List *lst2 = list_create();
+
+  list_push(&lst1, 1);
+  list_push(&lst1, 2);
+  list_push(&lst1, 3);
+  list_push(&lst1, 4);
+
+  list_push(&lst2, 9);
+  list_push(&lst2, 8);
+  list_push(&lst2, 7);
+
+  list_print(lst1);
+  list_print(lst2);
+
+  list_swap_nodes(lst1, 3, lst2, 0); // TODO: rever
+
+  printf("\n");
+  list_print(lst1);
+  list_print(lst2);
+  printf("\nExercicio 3: \n");
   // TODO:
 }
 

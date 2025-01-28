@@ -62,4 +62,12 @@ void list_reverse(List **lst);
  */
 char *list_stringfy(List *lst);
 
+/*
+ * Troca o nó de uma lista com o nó da outra lista a partir de
+ * determinada posição
+ *
+ * @return 1|0
+ */
+int list_swap_nodes(List *lst1, int i1, List *lst2, int i2);
+
 #endif // SINGLE_LINKED_LIST
