@@ -130,3 +130,36 @@ void dlist_print(DList *list) {
   }
   printf("NULL\n");
 }
+
+//////////////////////////
+///// MÉTODOS EXTRAS /////
+//////////////////////////
+
+void dlist_reverse(DList **list) {
+  if ((*list) == NULL) {
+    return;
+  }
+
+  DList *tail = (*list);
+  while (tail->next != NULL)
+    tail = tail->next;
+
+  DList *head = (*list);
+  while (head != tail) {
+    if (head == *list) {
+      tail->next = head;
+      head->prev = tail;
+      head = head->next;
+      head->prev = NULL;
+      tail->next->next = NULL;
+      break;
+    } else {
+      // TODO:
+      /*tail->next = head->next;*/
+      /*tail->prev = head;*/
+      /*head->next->prev = tail;*/
+      /*head->next = tail;*/
+    }
+  }
+  (*list) = head;
+}

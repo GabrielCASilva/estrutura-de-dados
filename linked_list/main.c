@@ -64,13 +64,27 @@ void exercises_test(void) {
   list_print(lst1);
   list_print(lst2);
 
-  list_swap_nodes(lst1, 3, lst2, 0); // TODO: rever
+  list_swap_nodes(lst1, 3, lst2, 1); // TODO: rever
+  printf("\nAltera el pos 3 com el pos 1...\n");
 
   printf("\n");
   list_print(lst1);
   list_print(lst2);
   printf("\nExercicio 3: \n");
-  // TODO:
+  DList *dlist = dlist_create();
+
+  dlist_push_tail(&dlist, 4);
+  dlist_push_tail(&dlist, 3);
+  dlist_push_tail(&dlist, 2);
+  dlist_push_tail(&dlist, 1);
+  dlist_print(dlist);
+
+  printf("\ninvertendo a lista duplamente encadeada...\n");
+  dlist_reverse(&dlist);
+  dlist_print(dlist);
+
+  printf("\nExercicio 4: \n");
+  // TODO
 }
 
 void circular_single_linked_list_app(void) {

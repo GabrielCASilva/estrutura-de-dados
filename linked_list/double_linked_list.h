@@ -54,4 +54,10 @@ void dlist_free(DList **list);
  */
 void dlist_print(DList *list);
 
+//////////////////////////
+///// MÉTODOS EXTRAS /////
+//////////////////////////
+
+void dlist_reverse(DList **list);
+
 #endif // DOUBLE_LINKED_LIST_H
