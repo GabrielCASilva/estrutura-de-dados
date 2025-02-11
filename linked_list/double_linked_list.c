@@ -152,13 +152,15 @@ void dlist_reverse(DList **list) {
       head = head->next;
       head->prev = NULL;
       tail->next->next = NULL;
-      break;
     } else {
-      // TODO:
-      /*tail->next = head->next;*/
-      /*tail->prev = head;*/
-      /*head->next->prev = tail;*/
-      /*head->next = tail;*/
+      DList *aux = tail->next;
+      aux->prev = head;
+      head->prev = tail;
+      aux = head;
+      head = head->next;
+      aux->next = tail->next;
+      tail->next = aux;
+      head->prev = NULL;
     }
   }
   (*list) = head;
