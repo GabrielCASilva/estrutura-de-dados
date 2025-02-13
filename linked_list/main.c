@@ -83,8 +83,20 @@ void exercises_test(void) {
   dlist_reverse(&dlist);
   dlist_print(dlist);
 
-  printf("\nExercicio 4: \n");
-  // TODO
+  printf("\nExercicio 4 e 5: \n");
+
+  list = list_create();
+  list_push(&list, 1);
+  list_push(&list, 2);
+  list_push(&list, 3);
+  list_push(&list, 1);
+  list_push(&list, 4);
+
+  list_print(list);
+  char *retorno = list_rmv_last_item_occurrence(&list, 5);
+
+  printf("Resposta [%s]\n", retorno);
+  list_print(list);
 }
 
 void circular_single_linked_list_app(void) {

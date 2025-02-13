@@ -70,4 +70,9 @@ char *list_stringfy(List *lst);
  */
 int list_swap_nodes(List *lst1, int i1, List *lst2, int i2);
 
+/*
+ * Remove a ultima ocorrencia de um item na lista
+ */
+char *list_rmv_last_item_occurrence(List **lst, int item);
+
 #endif // SINGLE_LINKED_LIST

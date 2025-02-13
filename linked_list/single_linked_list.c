@@ -208,3 +208,37 @@ int list_swap_nodes(List *lst1, int i1, List *lst2, int i2) {
 
   return 1;
 }
+
+char *list_rmv_last_item_occurrence(List **lst, int item) {
+  List *aux = *lst;
+  int lastPos = 0;
+  int i = 0;
+  // percorrendo a lista a primeira vez
+  while (aux != NULL) {
+    if (aux->n == item) {
+      lastPos = i;
+    }
+    i++;
+    aux = aux->next;
+  }
+  if (aux == NULL)
+    return "Elemento não se encontra na lista";
+
+  // atualizando a pos para head novamnete
+  aux = *lst;
+
+  // percorrendo a lista novamente até a posição desejada
+  i = 0;
+  List *prev = NULL;
+  while (i != lastPos) {
+    prev = aux;
+    aux = aux->next;
+    i++;
+  }
+
+  prev->next = aux->next;
+  free(aux);
+  aux = NULL;
+
+  return "Elemento removido da lista";
+}
